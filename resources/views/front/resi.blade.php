@@ -54,7 +54,7 @@
                 <td>{{ $resi->created_at }}</td>
                 <td><a href="{{url('detailresi')}}/{{$resi->kode_unik}}"><button class="btn btn-sm btn-primary">Detail</button></a>
                     @if ($resi->status_admin == 0)
-                    <a href="{{url('detailresi')}}/{{$resi->kode_unik}}"><button class="btn btn-sm btn-primary">Bayar</button></a>
+                    <a href="{{url('bayar')}}/{{$resi->id}}"><button class="btn btn-sm btn-primary">Bayar</button></a>
                     @endif
                      @if ($resi->status == 0)
                     <a href="{{url('balikin')}}/{{$resi->id}}"><button class="btn btn-sm btn-primary">Balikin</button></a>

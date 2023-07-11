@@ -36,6 +36,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/',  [productController::class, 'index']);
 Route::group(['middleware' => ['auth', 'UserMiddleware']], function () {
     Route::post('/booking-store', [BookingController::class, 'store'])->name('booking.store');
+    Route::get('/bayar/{id}', [BookingController::class, 'bayarview'])->name('booking.bayarview');
+    Route::post('/bayar', [BookingController::class, 'bayar'])->name('booking.bayar');
     Route::get('/keranjang', [BookingController::class, 'index'])->name('booking.index');
     Route::get('/chekout', [BookingController::class, 'checkout'])->name('booking.checout');
     Route::get('/listresi', [BookingController::class, 'listresi'])->name('booking.listresi');
@@ -68,6 +70,8 @@ Route::group(['middleware' => ['auth', 'AdminMiddleware']], function () {
     Route::get('/product/{id}/edit', [AdminController::class, 'editProduct'])->name('product.edit');
     Route::put('/product/{id}', [AdminController::class, 'updateProduct'])->name('product.update');
     Route::put('/kategori/{id}', [AdminController::class, 'updateKategori'])->name('kategori.update');
+    Route::get('/detail-bukti/{id}', [BookingController::class, 'detailtf'])->name('kategori.detail-tf');
+    Route::get('/acc-tf/{id}', [BookingController::class, 'responsebayar'])->name('kategori.detail-tf');
 
 
 

@@ -154,11 +154,44 @@ foreach ($temporaryCharts as $chart) {
 
         return back();
     }
+
+    
     function responsebalikin($id){
         $resi = BookingResi::where('id',$id)->update(['status' => 2]);
       
         Alert::success('Sukses', ' berhasil Response status pengembalian!');
 
         return back();
+    }
+
+    function bayarview($id){
+           $total = TemporaryChart::where('status', 0)->where('id_user',auth()->user()->id)->count();
+        $totalresi = BookingResi::where('id_user', auth()->user()->id)->count();
+        
+        return view('front.bayar',compact('id','total','totalresi'));
+    }
+
+    function bayar(Request $request){
+         $image = $request->file('gambar');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('produk'), $imageName);
+
+            $resi = BookingResi::where('id',$request->id_barang)->update(['status_admin' => 1,'gambar' => $imageName]);
+            Alert::success('Sukses', ' berhasil upload bukti pembayaran');
+
+            return redirect('listresi');
+    }
+
+    function responsebayar($id){
+        $resi = BookingResi::where('id',$id)->update(['status_admin' => 2]);
+      
+        Alert::success('Sukses', ' berhasil Response status pembayaran!');
+
+        return back();
+    }
+
+    function detailtf($id){
+        $resi = BookingResi::where('id',$id)->first();
+        return view('back.detail-tf',compact('resi'));
     }
 }

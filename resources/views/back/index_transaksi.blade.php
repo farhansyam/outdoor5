@@ -56,6 +56,12 @@
                     @if ($transaksi->status == 1)
                         <a href="{{url('acc')}}/{{$transaksi->id}}"><button class="btn btn-sm btn-success">Acc</button></a>
                     @endif
+                    @if($transaksi->gambar)
+                    <a href="{{url('detail-bukti')}}/{{$transaksi->id}}"><button class="btn btn-sm btn-success">Detail Bukti</button></a>
+                    @endif
+                    @if ($transaksi->status_admin == 1)
+                        <a href="{{url('acc-tf')}}/{{$transaksi->id}}"><button class="btn btn-sm btn-success">Acc-tf</button></a>
+                    @endif
                 <a href="{{url('delete-transaksi')}}/{{$transaksi->id}}"><button class="btn btn-sm btn-danger">Hapus</button></a></td>
             </tr>
             @php
