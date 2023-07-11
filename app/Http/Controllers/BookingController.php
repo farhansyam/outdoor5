@@ -146,4 +146,19 @@ foreach ($temporaryCharts as $chart) {
         $remaining_seconds = $remaining_time % 60; // Hitung detik yang tersisa
         return view('front.chartresi',compact('charts','total','totalHarga','totalresi','resi','expiry_time'));       
     }
+
+    function requestbalikin($id){
+        $resi = BookingResi::where('id',$id)->update(['status' => 1]);
+      
+        Alert::success('Sukses', ' berhasil Request status pengembalian!');
+
+        return back();
+    }
+    function responsebalikin($id){
+        $resi = BookingResi::where('id',$id)->update(['status' => 2]);
+      
+        Alert::success('Sukses', ' berhasil Response status pengembalian!');
+
+        return back();
+    }
 }

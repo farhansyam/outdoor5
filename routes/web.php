@@ -39,12 +39,15 @@ Route::group(['middleware' => ['auth', 'UserMiddleware']], function () {
     Route::get('/keranjang', [BookingController::class, 'index'])->name('booking.index');
     Route::get('/chekout', [BookingController::class, 'checkout'])->name('booking.checout');
     Route::get('/listresi', [BookingController::class, 'listresi'])->name('booking.listresi');
+    Route::get('/balikin/{id}', [BookingController::class, 'requestbalikin'])->name('booking.requestbalikin');
     Route::get('/detailresi/{id}', [BookingController::class, 'show'])->name('booking.show');
     // Route yang menggunakan middleware UserMiddleware
 });
 
 // Route yang menggunakan middleware AdminMiddleware
 Route::group(['middleware' => ['auth', 'AdminMiddleware']], function () {
+    Route::get('/acc/{id}', [BookingController::class, 'responsebalikin'])->name('booking.respponsebalikin');
+
     Route::get('/kategori', [AdminController::class, 'indexKategtori'])->name('admin.kategori');
     Route::get('/users', [AdminController::class, 'indexUser'])->name('admin.users');
     Route::get('/index-transaksi', [AdminController::class, 'indexTransaksi'])->name('admin.transaksi');    
