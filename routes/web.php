@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth', 'AdminMiddleware']], function () {
     Route::put('/kategori/{id}', [AdminController::class, 'updateKategori'])->name('kategori.update');
     Route::get('/detail-bukti/{id}', [BookingController::class, 'detailtf'])->name('kategori.detail-tf');
     Route::get('/acc-tf/{id}', [BookingController::class, 'responsebayar'])->name('kategori.detail-tf');
+    Route::get('/chart', [AdminController::class, 'chart'])->name('kategori.chart');
 
 
 

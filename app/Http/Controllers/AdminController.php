@@ -10,6 +10,9 @@ use App\Models\TemporaryChart;
 use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Auth;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 class AdminController extends Controller
 {
     /**
@@ -272,6 +275,25 @@ foreach ($temporaryCharts as $chart) {
         $produk->save();
         Alert::success('Sukses', ' berhasil Update Data');
         return redirect()->route('products.index')->with('success', 'Produk berhasil diperbarui.');
+    }
+
+    function chart(){
+$bookingData = BookingResi::select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(*) as count'))
+    ->groupBy('date')
+    ->get();
+
+// Format data untuk digunakan dalam JavaScript
+$formattedData = [];
+
+foreach ($bookingData as $data) {
+    $formattedData[] = [
+        'date' => Carbon::parse($data->date)->format('Y-m-d'),
+        'count' => $data->count,
+    ];
+}
+
+return view('back.chart')->with('bookingData', json_encode($formattedData));
+
     }
     
 }
